@@ -950,7 +950,7 @@ def refresh_euler_tool_catalog(_n_clicks, _hash, _connect, _disconnect):
 #     )
 
 
-── EULER OAuth Callbacks ─────────────────────────────────────────────────────
+# ── EULER OAuth Callbacks ─────────────────────────────────────────────────────
 @callback(
     Output("oauth-redirect", "href"),
     Input("euler-connect-btn", "n_clicks"),
