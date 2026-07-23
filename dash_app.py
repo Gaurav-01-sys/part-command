@@ -2117,29 +2117,65 @@ def _tool_catalog_item(name, description, operation, *, live):
         className="pc-tool-item",
     )
 
-
 @callback(
     Output("euler-tool-status", "children"),
     Output("euler-tool-status", "className"),
     Output("euler-tool-catalog", "children"),
     Input("euler-tools-refresh-btn", "n_clicks"),
-    Input("euler-page-mounted", "data"),
+    Input("url", "hash"),
+    Input("euler-connect-btn", "n_clicks"),
+    Input("euler-disconnect-btn", "n_clicks"),
     prevent_initial_call=False,
 )
-def refresh_euler_tool_catalog(_n_clicks, _mounted):
-    """Show only the live catalog; documented names are visibly non-live hints."""
+def refresh_euler_tool_catalog(_n_clicks, _hash, _connect, _disconnect):
+    """Same live path as the Groq agent: EulerMCPClient.list_tools()."""
+    live_tools = []
+    reason = ""
+
     try:
-        live_tools = EULER_SOLUTION.discover(force=True)
+        client = EulerMCPClient()
+        try:
+            tools = client.list_tools()
+            if getattr(client, "live_fetch_ok", False) and tools:
+                live_tools = [
+                    {
+                        "name": t.get("name"),
+                        "description": t.get("description") or "",
+                    }
+                    for t in tools
+                    if isinstance(t, dict) and t.get("name")
+                ]
+        finally:
+            client.close()
     except Exception as exc:
-        live_tools = []
         reason = str(exc)
-    else:
-        reason = ""
+
+    if not live_tools:
+        try:
+            discovered = EULER_SOLUTION.discover(force=True)
+            live_tools = []
+            for t in discovered or []:
+                name = getattr(t, "name", None) or (t.get("name") if isinstance(t, dict) else None)
+                desc = getattr(t, "description", None) or (t.get("description") if isinstance(t, dict) else "") or ""
+                if name:
+                    live_tools.append({"name": name, "description": desc})
+            if live_tools:
+                reason = ""
+        except Exception as exc:
+            if not reason:
+                reason = str(exc)
 
     if live_tools:
         items = [
-            _tool_catalog_item(tool.name, tool.description, tool.operation, live=True)
-            for tool in live_tools
+            _tool_catalog_item(
+                t["name"],
+                t.get("description") or "",
+                "write"
+                if any(w in str(t["name"]).lower() for w in ("submit", "manage", "create", "update", "delete"))
+                else "read",
+                live=True,
+            )
+            for t in live_tools
         ]
         return (
             [html.Span(className="pc-chip-dot"), f"{len(live_tools)} live tools"],
@@ -2161,19 +2197,21 @@ def refresh_euler_tool_catalog(_n_clicks, _mounted):
         _tool_catalog_item(
             tool.get("name"),
             tool.get("description"),
-            "write" if any(word in str(tool.get("name", "")).lower() for word in ("submit", "manage", "create", "update", "delete")) else "read",
+            "write"
+            if any(w in str(tool.get("name", "")).lower() for w in ("submit", "manage", "create", "update", "delete"))
+            else "read",
             live=False,
         )
         for tool in reference_tools
     ]
-    detail = reason[:240] if reason else "The live catalog returned no tools."
+    detail = (reason or "The live catalog returned no tools.")[:240]
     return (
         [html.Span(className="pc-chip-dot"), "Live catalog unavailable"],
         "pc-chip pc-chip-danger",
         html.Div(
             [
                 html.Div(
-                    "No tool calls are possible until EULER is connected. The names below are documented reference hints only.",
+                    "Could not load tools/list. Reference names below are not used for routing.",
                     className="pc-muted",
                     style={"marginBottom": "6px"},
                 ),
@@ -2182,6 +2220,72 @@ def refresh_euler_tool_catalog(_n_clicks, _mounted):
             ]
         ),
     )
+
+
+# @callback(
+#     Output("euler-tool-status", "children"),
+#     Output("euler-tool-status", "className"),
+#     Output("euler-tool-catalog", "children"),
+#     Input("euler-tools-refresh-btn", "n_clicks"),
+#     Input("euler-page-mounted", "data"),
+#     prevent_initial_call=False,
+# )
+# def refresh_euler_tool_catalog(_n_clicks, _mounted):
+#     """Show only the live catalog; documented names are visibly non-live hints."""
+#     try:
+#         live_tools = EULER_SOLUTION.discover(force=True)
+#     except Exception as exc:
+#         live_tools = []
+#         reason = str(exc)
+#     else:
+#         reason = ""
+
+#     if live_tools:
+#         items = [
+#             _tool_catalog_item(tool.name, tool.description, tool.operation, live=True)
+#             for tool in live_tools
+#         ]
+#         return (
+#             [html.Span(className="pc-chip-dot"), f"{len(live_tools)} live tools"],
+#             "pc-chip pc-chip-success",
+#             html.Div(
+#                 [
+#                     html.Div(
+#                         "Confirmed by EULER tools/list. These names are safe for routing.",
+#                         className="pc-muted",
+#                         style={"marginBottom": "10px"},
+#                     ),
+#                     html.Div(items, className="pc-tool-list"),
+#                 ]
+#             ),
+#         )
+
+#     reference_tools = EulerMCPClient.known_tools()
+#     items = [
+#         _tool_catalog_item(
+#             tool.get("name"),
+#             tool.get("description"),
+#             "write" if any(word in str(tool.get("name", "")).lower() for word in ("submit", "manage", "create", "update", "delete")) else "read",
+#             live=False,
+#         )
+#         for tool in reference_tools
+#     ]
+#     detail = reason[:240] if reason else "The live catalog returned no tools."
+#     return (
+#         [html.Span(className="pc-chip-dot"), "Live catalog unavailable"],
+#         "pc-chip pc-chip-danger",
+#         html.Div(
+#             [
+#                 html.Div(
+#                     "No tool calls are possible until EULER is connected. The names below are documented reference hints only.",
+#                     className="pc-muted",
+#                     style={"marginBottom": "6px"},
+#                 ),
+#                 html.Div(detail, className="pc-mono", style={"marginBottom": "10px"}),
+#                 html.Div(items, className="pc-tool-list"),
+#             ]
+#         ),
+#     )
 
 
 # ── EULER OAuth Callbacks ─────────────────────────────────────────────────────
