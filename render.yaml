@@ -1,0 +1,32 @@
+services:
+  - type: web
+    name: partner-command-center
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn dash_app:server --workers 2 --timeout 120 --bind 0.0.0.0:$PORT
+    plan: free
+    envVars:
+      - key: ANTHROPIC_API_KEY
+        sync: false          # set manually in Render dashboard
+      - key: CLAUDE_MODEL
+        value: claude-sonnet-5
+      - key: NVIDIA_API_KEY
+        sync: false          # set manually in Render dashboard
+      - key: NVIDIA_MODEL
+        value: meta/llama3-70b-instruct
+      - key: GROQ_API_KEY
+        sync: false          # set manually in Render dashboard
+      - key: GROQ_MODEL
+        value: qwen/qwen3.6-27b
+      - key: EULER_MCP_URL
+        value: https://mcp.eulerapp.com/mcp
+      - key: EULER_REDIRECT_URI
+        sync: false          # set manually to https://<your-render-url>.onrender.com/euler-callback
+      - key: EULER_TOKEN_FILE
+        value: ".euler_token"
+      - key: EULER_TOKEN_SECRET
+        sync: false          # set manually to a random string in Render dashboard
+      - key: EULER_API_BASE
+        value: https://api.eulerapp.com/v1
+      - key: PYTHON_VERSION
+        value: "3.11.0"

@@ -1,0 +1,360 @@
+/* ═══════════════════════════════════════════════════════════════
+   Partner Command Center — Custom Dash Theme
+   Palette: bg #0F172A · card #1E293B · accent #38BDF8
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ─── Base ──────────────────────────────────────────────────── */
+body {
+    background-color: #0F172A !important;
+    color: #E2E8F0 !important;
+    font-family: 'Inter', sans-serif !important;
+}
+
+.container-fluid {
+    background-color: #0F172A !important;
+}
+
+/* ─── Header Banner ─────────────────────────────────────────── */
+.header-banner {
+    background: linear-gradient(135deg, #0F172A 0%, #1E3A5F 100%);
+    padding: 22px 28px;
+    border-radius: 16px;
+    border: 1px solid #1E3A8A;
+    box-shadow: 0 4px 24px rgba(56, 189, 248, 0.10);
+    margin-bottom: 8px;
+}
+
+/* ─── KPI Cards ─────────────────────────────────────────────── */
+.kpi-card {
+    background: #1E293B;
+    border-radius: 12px;
+    padding: 18px 16px 14px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+    height: 100%;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    border-top: 1px solid #334155;
+    border-right: 1px solid #334155;
+    border-bottom: 1px solid #334155;
+}
+
+.kpi-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(56, 189, 248, 0.15);
+}
+
+.kpi-label {
+    color: #94A3B8 !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
+    margin: 0 0 6px !important;
+}
+
+/* ─── Main Tabs ─────────────────────────────────────────────── */
+.nav-tabs {
+    border-bottom: 1px solid #334155 !important;
+    gap: 2px;
+}
+
+.nav-tabs .nav-link {
+    color: #94A3B8 !important;
+    font-weight: 600 !important;
+    font-size: 13px !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 10px 16px !important;
+    background: transparent !important;
+    transition: color 0.15s ease !important;
+}
+
+.nav-tabs .nav-link:hover {
+    color: #CBD5E1 !important;
+    background: rgba(51, 65, 85, 0.4) !important;
+}
+
+.nav-tabs .nav-link.active {
+    color: #38BDF8 !important;
+    background: transparent !important;
+    border-bottom: 3px solid #38BDF8 !important;
+}
+
+.tab-content {
+    background: transparent !important;
+    padding-top: 20px;
+}
+
+/* ─── Dropdowns (Dash Select) ───────────────────────────────── */
+.Select-control {
+    background: #1E293B !important;
+    border: 1px solid #475569 !important;
+    border-radius: 8px !important;
+    min-height: 36px !important;
+    color: #E2E8F0 !important;
+}
+
+.Select-control:hover {
+    border-color: #38BDF8 !important;
+}
+
+.Select-value-label,
+.Select-placeholder {
+    color: #E2E8F0 !important;
+    line-height: 34px !important;
+}
+
+.Select-input input {
+    color: #E2E8F0 !important;
+    font-family: 'Inter', sans-serif !important;
+}
+
+.Select-menu-outer {
+    background: #1E293B !important;
+    border: 1px solid #475569 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5) !important;
+    z-index: 9999 !important;
+}
+
+.Select-option {
+    background: #1E293B !important;
+    color: #CBD5E1 !important;
+    font-size: 13px !important;
+    padding: 8px 12px !important;
+}
+
+.Select-option:hover,
+.Select-option.is-focused {
+    background: #334155 !important;
+    color: #F1F5F9 !important;
+}
+
+.Select-option.is-selected {
+    background: #1E3A5F !important;
+    color: #38BDF8 !important;
+}
+
+.Select-arrow-zone .Select-arrow {
+    border-top-color: #94A3B8 !important;
+}
+
+.filter-label {
+    color: #94A3B8 !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.04em !important;
+    text-transform: uppercase !important;
+    margin-bottom: 4px !important;
+    display: block !important;
+}
+
+/* ─── AG Grid Dark Theme ─────────────────────────────────────── */
+.ag-theme-alpine-dark {
+    --ag-background-color: #1E293B;
+    --ag-odd-row-background-color: #1E293B;
+    --ag-header-background-color: #0F172A;
+    --ag-header-foreground-color: #38BDF8;
+    --ag-foreground-color: #CBD5E1;
+    --ag-border-color: #334155;
+    --ag-secondary-border-color: #334155;
+    --ag-row-hover-color: rgba(56, 189, 248, 0.06);
+    --ag-selected-row-background-color: rgba(56, 189, 248, 0.12);
+    --ag-font-family: 'Inter', sans-serif;
+    --ag-font-size: 12px;
+    --ag-header-height: 40px;
+    --ag-row-height: 36px;
+    --ag-cell-horizontal-padding: 12px;
+    --ag-header-column-separator-color: #334155;
+    --ag-input-focus-border-color: #38BDF8;
+    --ag-checkbox-checked-color: #38BDF8;
+    --ag-range-selection-border-color: #38BDF8;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #334155 !important;
+}
+
+.ag-header-cell-label {
+    font-weight: 700 !important;
+    font-size: 11px !important;
+    letter-spacing: 0.04em !important;
+    text-transform: uppercase !important;
+}
+
+.ag-paging-panel {
+    color: #94A3B8 !important;
+    font-size: 12px !important;
+    border-top: 1px solid #334155 !important;
+    background: #0F172A !important;
+}
+
+.ag-paging-button {
+    color: #38BDF8 !important;
+}
+
+/* ─── Charts ─────────────────────────────────────────────────── */
+.dash-graph {
+    background: transparent !important;
+}
+
+.js-plotly-plot .plotly .bg {
+    fill: transparent !important;
+}
+
+/* ─── Buttons ────────────────────────────────────────────────── */
+.btn-primary {
+    background: #38BDF8 !important;
+    border-color: #38BDF8 !important;
+    color: #0F172A !important;
+    font-weight: 700 !important;
+    border-radius: 8px !important;
+    font-size: 13px !important;
+    transition: opacity 0.15s ease, transform 0.1s ease !important;
+}
+
+.btn-primary:hover {
+    background: #7DD3FC !important;
+    border-color: #7DD3FC !important;
+    transform: translateY(-1px) !important;
+}
+
+.btn-secondary,
+.btn-outline-secondary {
+    background: transparent !important;
+    border-color: #475569 !important;
+    color: #94A3B8 !important;
+    border-radius: 8px !important;
+    font-size: 13px !important;
+    transition: border-color 0.15s, color 0.15s !important;
+}
+
+.btn-secondary:hover,
+.btn-outline-secondary:hover {
+    border-color: #38BDF8 !important;
+    color: #38BDF8 !important;
+    background: rgba(56, 189, 248, 0.08) !important;
+}
+
+/* ─── DB-GPT Section ─────────────────────────────────────────── */
+.dbgpt-header {
+    background: linear-gradient(135deg, #1A0F2E 0%, #2D1B4E 100%);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    border: 1px solid #553C9A;
+}
+
+.dbgpt-status-ok {
+    background: #0F2D1B;
+    border-left: 4px solid #10B981;
+    border-radius: 8px;
+    padding: 10px 14px;
+    color: #6EE7B7;
+    font-size: 13px;
+}
+
+.dbgpt-status-err {
+    background: #2D1B1B;
+    border-left: 4px solid #EF4444;
+    border-radius: 8px;
+    padding: 10px 14px;
+    color: #FCA5A5;
+    font-size: 13px;
+}
+
+/* ─── Cards / Boxes ──────────────────────────────────────────── */
+.card {
+    background: #1E293B !important;
+    border: 1px solid #334155 !important;
+    border-radius: 12px !important;
+}
+
+.card-body {
+    background: transparent !important;
+}
+
+/* ─── Schema Details ─────────────────────────────────────────── */
+.schema-details {
+    background: #1E293B;
+    border-radius: 10px;
+    padding: 12px 16px;
+    border: 1px solid #334155;
+    margin-bottom: 12px;
+}
+
+.schema-details summary {
+    color: #38BDF8;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 13px;
+    list-style: none;
+    user-select: none;
+}
+
+.schema-details summary::-webkit-details-marker {
+    display: none;
+}
+
+.schema-details summary::before {
+    content: "▶ ";
+    font-size: 10px;
+}
+
+details[open] summary::before {
+    content: "▼ ";
+}
+
+/* ─── Horizontal Rule ────────────────────────────────────────── */
+hr {
+    border-color: #334155 !important;
+    opacity: 0.5;
+}
+
+/* ─── Custom Scrollbar ───────────────────────────────────────── */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0F172A;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #475569;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #64748B;
+}
+
+/* ─── Loading Overlay ────────────────────────────────────────── */
+._dash-loading {
+    color: #38BDF8 !important;
+}
+
+/* ─── Textarea ───────────────────────────────────────────────── */
+textarea {
+    background: #1E293B !important;
+    color: #E2E8F0 !important;
+    border: 1px solid #475569 !important;
+    border-radius: 8px !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 13px !important;
+}
+
+textarea:focus {
+    border-color: #38BDF8 !important;
+    outline: none !important;
+    box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.15) !important;
+}
+
+/* ─── Animations ─────────────────────────────────────────────── */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.tab-pane.active {
+    animation: fadeInUp 0.2s ease forwards;
+}

@@ -1,0 +1,53 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+*.whl
+
+# Virtual environments  ← NEVER commit these
+ld/
+venv/
+.venv/
+env/
+ENV/
+
+# Environment & secrets  ← NEVER commit .env (contains API keys)
+.env
+.env.*
+!.env.example
+
+# Logs
+logs/
+*.log
+
+# Gradio / ngrok cache
+.gradio/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Test / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Sensitive
+.euler_token
+.claude/
