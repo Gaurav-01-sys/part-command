@@ -80,13 +80,25 @@ _token_set: Optional[TokenSet] = None
 _pending:   dict               = {}
 
 
+# def get_token_set() -> Optional[TokenSet]:
+#     global _token_set
+#     if _token_set and _token_set.is_expired() and _token_set.refresh_token:
+#         try:
+#             _token_set = _do_refresh(_token_set)
+#             _persist(_token_set)
+#             log.info("EULER token silently refreshed.")
+#         except Exception as exc:
+#             log.warning("EULER silent token refresh failed: %s", exc)
+#     return _token_set
+
 def get_token_set() -> Optional[TokenSet]:
     global _token_set
+    if _token_set is None:
+        _token_set = load_persisted()
     if _token_set and _token_set.is_expired() and _token_set.refresh_token:
         try:
             _token_set = _do_refresh(_token_set)
             _persist(_token_set)
-            log.info("EULER token silently refreshed.")
         except Exception as exc:
             log.warning("EULER silent token refresh failed: %s", exc)
     return _token_set
