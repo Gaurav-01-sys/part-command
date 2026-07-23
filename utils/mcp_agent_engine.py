@@ -442,7 +442,7 @@ def _summarize_for_human(
 
     blocks = []
     for tr in tool_results:
-        raw = trim_tool_raw(tr.get("raw") or "", max_tokens=3500, model=model)
+        raw = trim_tool_raw(tr.get("raw") or "", max_tokens=1500, model=model)
         blocks.append(
             f"Tool: {tr.get('name')}\n"
             f"Args: {json.dumps(tr.get('arguments') or {}, default=str)}\n"
@@ -591,7 +591,7 @@ def run_euler_agent(
     model: str | None = None,
     temperature: float = 0.2,
     top_p: float = 0.95,
-    max_tokens: int = 1200,
+    max_tokens: int = 600,
     max_rounds: int = MAX_TOOL_ROUNDS,
 ) -> dict[str, Any]:
     """
@@ -795,7 +795,7 @@ def chat_with_euler_tools(
     model: str | None = None,
     temperature: float = 0.2,
     top_p: float = 0.95,
-    max_tokens: int = 1200,
+    max_tokens: int = 600,
     max_rounds: int = MAX_TOOL_ROUNDS,
 ) -> str:
     result = run_euler_agent(
